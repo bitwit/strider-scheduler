@@ -1,6 +1,68 @@
-#template {
-  textarea { 
+#scheduler {
+  textarea {
     width: 100%;
     height: 6em;
   }
+
+  h3{
+    clear: both;
+  }
+
+  label.day-option{
+    float: left;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+  }
 }
+
+
+.scheduler-timepicker {
+  overflow: hidden;
+
+  &.hourly {
+    .separator, .hours, .hours-control, .meridian {
+      display: none;
+    }
+  }
+
+  span.meridian{
+    display: block;
+    float: left;
+    margin-left: 10px;
+  }
+
+  div.picker-row{
+    clear: both;
+  }
+
+  a.btn-link{
+    display: block;
+    float: left;
+    width: 60px;
+    background: 0;
+    border: 0;
+    box-shadow: none;
+    box-sizing: border-box;
+  }
+  span.separator{
+    display: block;
+    float: left;
+    width: 10px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+  }
+
+  input.hours-control, input.minutes-control{
+    display: block;
+    float: left;
+    width: 50px;
+    font-size: 18px;
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+}
+
+

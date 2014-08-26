@@ -1,7 +1,7 @@
 {
-  "name": "strider-template",
+  "name": "strider-scheduler",
   "version": "1.0.0",
-  "description": "Plugin template for Strider CD",
+  "description": "Scheduler Plugin for Strider CD",
   "main": "webapp.js",
   "scripts": {
     "test": "mocha -R spec --recursive test"
@@ -18,16 +18,18 @@
   "author": "Kyle Newsome <kyle@bitwit.ca>",
   "license": "ISC",
   "dependencies": {
+    "lodash": "2.4.1",
+    "moment": "2.8.3"
   },
   "strider": {
     "type": "job",
-    "id": "template",
-    "title": "Plugin Template",
+    "id": "scheduler",
+    "title": "Strider Scheduler",
     "worker": "worker.js",
     "webapp": "webapp.js",
     "icon": "icon.png",
     "config": {
-      "controller": "TemplateCtrl"
+      "controller": "SchedulerCtrl"
     }
   },
   "devDependencies": {

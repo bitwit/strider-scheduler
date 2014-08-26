@@ -1,37 +1,27 @@
+var scheduler = require('./lib/scheduler');
+
 module.exports = {
     // mongoose schema, if you need project-specific config
     config: {
-        "template": {
-            environment: {type: String, default: 'Hi from `environment`'},
-            prepare: {type: String, default: 'Hi from `prepare`'},
-            test: {type: String, default: 'Hi from `test`'},
-            deploy: {type: String, default: 'Hi from `deploy`'},
-            cleanup: {type: String, default: 'Hi from `cleanup`'}
+        "scheduler": {
+            frequency: {type: Number, default: 0},
+            lastJob: {type: Date},
+            day: {type: String},
+            time: {type: Date},
+            daySelection: {type: Array}
         }
     },
-    // Define project-specific routes
-    //   all routes created here are namespaced within /:org/:repo/api/:pluginid
-    //   req.project is the current project
-    //   req.accessLevel is the current user's access level for the project
-    //      0 - anonymous, 1 - authed, 2 - admin / collaborator
-    //   req.user is the current user
-    //   req.pluginConfig() -> get the config for this plugin
-    //   req.pluginConfig(config, cb(err)) -> set the config for this plugin
-    routes: function (app, context) {
+    routes: function (app, ctx) {
+        scheduler.init(ctx);
     },
-    // Define global routes
-    //   all routes namespaced within /ext/:pluginid
-    //   req.user is the current user
-    //   req.user.account_level can be used for authorization
-    //      0 - anonymous, 1 - authed, 2 - admin / collaborator
-    globalRoutes: function (app, context) {
-    },
-    // Listen for global events
-    //   all job-local events that begin with `plugin.` are proxied to
-    //   the main strider eventemitter, so you can listen for them here.
-    //   Other events include `job.new`, `job.done` and `browser.update`.
     listen: function (emitter, context) {
+        emitter.on('branch.plugin_config', function (project, branch, plugin, config) {
+            if (plugin === 'scheduler') {
+                scheduler.branchChange(project, branch, config);
+            }
+        });
+        emitter.on('branch.plugin_order', function (project, branch, plugins) {
+            scheduler.branchPluginOrderChange(project, branch, plugins);
+        });
     }
-
-
 };

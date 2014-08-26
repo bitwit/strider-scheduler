@@ -1,45 +1,45 @@
-<div id="template" class="well">
-    <h2>Template Config Page</h2>
-    <button ng-click="save()" class="btn btn-primary">Save</button>
-    <br/>
-    <br/>
-    <p class="help-text">
-        These are some messages for demonstrating how the plugin saves config data and reports it during the test process.
-        Each message used slightly differently, so see `worker.js` for different ways to execute actions using config data
-    </p>
-    <h3>Environment</h3>
+<div id="scheduler" class="well">
+    <h2>Scheduler Config Page</h2>
+    <br />
+    <h3>Run a job...</h3>
+    <br />
+    <select ng-model="config.frequency" ng-options="option.value as option.key for option in frequencyOptions">
+    </select>
+
+    <div ng-if="config.frequency === 0">
+        <p>This branch's repository will be polled every 5 minutes for changes (including all merges).</p>
+    </div>
+
+    <div ng-if="config.frequency > 0">
+        <div ng-if="config.frequency === times.daily">
+            <h3>Every...</h3>
+            <br />
+            <label class="day-option" ng-repeat="day in dayOptions">
+                <input
+                  type="checkbox"
+                  name="selectedDays[]"
+                  value="[[day.value]]"
+                  ng-checked="isDaySelected(day)"
+                  ng-click="toggleDaySelection(day)"
+                  > [[day.key]]
+            </label>
+        </div>
+
+        <h3>[[(config.frequency === times.hourly) ? "On the..." : "At..."]]</h3>
+
+        <div class="scheduler-timepicker" ng-class="{hourly: config.frequency === times.hourly}">
+            <timepicker ng-model="config.time" ng-change="changed()" hour-step="hstep" minute-step="mstep"></timepicker>
+        </div>
+    </div>
+
+    <h3>Last Job Run By Scheduler</h3>
+    <br />
     <div class="row-fluid">
-        <div class="span12">
-            <textarea ui-refresh="selectedTab" ng-model="config.environment"></textarea>
-        </div>
+        <span ng-if="config.lastHash">[[config.lastHash | limitTo: 7]] was scheduled at </span>
+        <span ng-if="config.lastJob">[[config.lastJob | date:'medium']]</span>
+        <span ng-if="!config.lastJob">Scheduler has not run a job yet</span>
     </div>
     <br/>
-    <h3>Prepare</h3>
-    <div class="row-fluid">
-        <div class="span12">
-            <textarea ui-refresh="selectedTab" ng-model="config.prepare"></textarea>
-        </div>
-    </div>
-    <br/>
-    <h3>Test</h3>
-    <div class="row-fluid">
-        <div class="span12">
-            <textarea ui-refresh="selectedTab" ng-model="config.test"></textarea>
-        </div>
-    </div>
-    <br/>
-    <h3>Deploy</h3>
-    <div class="row-fluid">
-        <div class="span12">
-            <textarea ui-refresh="selectedTab" ng-model="config.deploy"></textarea>
-        </div>
-    </div>
-    <br/>
-    <h3>Cleanup</h3>
-    <div class="row-fluid cleanup">
-        <div class="span12">
-            <textarea ui-refresh="selectedTab" ng-model="config.cleanup"></textarea>
-        </div>
-    </div>
+
     <button ng-click="save()" class="btn btn-primary">Save</button>
 </div>

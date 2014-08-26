@@ -1,8 +1,6 @@
-# strider-template
+# strider-scheduler
 
-This is a base template for developing Strider CD plugins to help you get your own plugin up and running faster.
+Scheduler plugin in progress, not yet complete.
 
-It demonstrates some basic front/backend functionality including configuration saving and some console.logging during the
-test process
-
-## [Learn more about how Strider loads plugins here](https://github.com/Strider-CD/strider-extension-loader)
+- TODO: fix saving after new hash job
+- TODO: Save the hash of jobs NOT triggered by scheduler, so that it doesn't schedule any in duplication and can play nicely with service hooks
