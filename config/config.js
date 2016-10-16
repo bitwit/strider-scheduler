@@ -38,7 +38,7 @@ app.controller('SchedulerCtrl', ['$scope', function ($scope) {
     $scope.toggleDaySelection = function (day) {
         for (var i = 0; i < $scope.config.daySelection.length; i++) {
             var obj = $scope.config.daySelection[i];
-            if (day.value === obj.value) {
+            if (day.value === obj) {
                 $scope.config.daySelection.splice(i, 1);
                 return;
             }
