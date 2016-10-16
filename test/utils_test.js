@@ -46,7 +46,7 @@ describe("utils", function() {
                 time: moment("1976-10-01 4:30 +0000", "YYYY-MM-DD HH:mm Z"),
                 daySelection:[
                     // Wednedays only
-                    {key: 'Wednesday', value:3}
+                    3
                 ]
             };
             var time = utils.getNextScheduledTime(config);
@@ -64,7 +64,7 @@ describe("utils", function() {
                 time: moment("1976-10-01 4:30 +0000", "YYYY-MM-DD HH:mm Z"),
                 daySelection:[
                     // Sundays only, but the time above has passed already
-                    {key: 'Sunday', value:0}
+                    0
                 ]
             };
             var time = utils.getNextScheduledTime(config);
@@ -81,8 +81,8 @@ describe("utils", function() {
                 frequency: 60 * 60 * 1000 * 24, //daily
                 time: moment("1976-10-01 4:30 +0000", "YYYY-MM-DD HH:mm Z"),
                 daySelection:[
-                    {key: 'Friday', value:5},
-                    {key: 'Tuesday', value:2}
+                    5,
+                    2
                 ]
             };
             var time = utils.getNextScheduledTime(config);
@@ -99,7 +99,7 @@ describe("utils", function() {
                 frequency: 60 * 60 * 1000 * 24, //daily
                 time: moment('2014-10-13T01:48:26.433Z'), //format as expected from JSON objects
                 daySelection:[
-                    {key: 'Wednesday', value:3}
+                    3
                 ]
             };
             var time = utils.getNextScheduledTime(config);
