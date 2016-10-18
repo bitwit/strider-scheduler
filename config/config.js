@@ -38,18 +38,22 @@ app.controller('SchedulerCtrl', ['$scope', function ($scope) {
     $scope.toggleDaySelection = function (day) {
         for (var i = 0; i < $scope.config.daySelection.length; i++) {
             var obj = $scope.config.daySelection[i];
-            if (day.value === obj.value) {
+            if (day.value === obj) {
                 $scope.config.daySelection.splice(i, 1);
                 return;
             }
         }
-        $scope.config.daySelection.push(day);
+        $scope.config.daySelection.push(day.value);
     };
 
     $scope.isDaySelected = function (day) {
+        if(!$scope.config.daySelection){
+            $scope.config.daySelection = [];
+        }
+
         for (var i = 0; i < $scope.config.daySelection.length; i++) {
             var obj = $scope.config.daySelection[i];
-            if (day.value === obj.value) {
+            if (day.value === obj) {
                 return true;
             }
         }
